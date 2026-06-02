@@ -1,0 +1,163 @@
+# MSTS-AN Configuration File
+# Multi-Scale Temporal-Spatial Attention Network for Alzheimer's Detection
+
+# Dataset Configuration
+data:
+  dataset_name: "OpenNeuro_Alzheimer_EEG"
+  data_path: "./data/raw"
+  processed_path: "./data/processed"
+
+  # EEG Parameters
+  sampling_rate: 256
+  segment_length: 4  # seconds
+  segment_samples: 1024  # 4s * 256Hz
+
+  # Frequency Bands (Hz)
+  bands:
+    delta: [0.5, 4]
+    theta: [4, 8]
+    alpha: [8, 13]
+    beta: [13, 30]
+
+  # Preprocessing
+  filter_low: 0.5
+  filter_high: 45
+  filter_order: 512
+  use_ica: true
+  ica_method: "infomax"
+
+  # Wavelet Decomposition
+  wavelet: "db4"  # Daubechies 4
+  decomposition_level: 4
+
+  # Classes
+  num_classes: 3
+  class_names: ["HC", "MCI", "AD"]  # Healthy Control, Mild Cognitive Impairment, Alzheimer's Disease
+
+# Model Architecture
+model:
+  name: "MSTS-AN"
+
+  # GCN Module
+  gcn:
+    hidden_dims: [64, 128, 256]
+    dropout: 0.3
+    use_batch_norm: true
+
+  # Vision Transformer Module
+  vit:
+    patch_size: 16
+    embed_dim: 256
+    num_heads: 8
+    num_layers: 4
+    mlp_ratio: 4.0
+    dropout: 0.1
+    attention_dropout: 0.1
+
+  # Attention Fusion
+  attention_fusion:
+    hidden_dim: 128
+    num_bands: 4
+    dropout: 0.2
+
+  # Classifier
+  classifier:
+    hidden_dims: [256, 128]
+    dropout: 0.3
+
+# Training Configuration
+training:
+  # Cross-validation
+  n_splits: 5
+  stratified: true
+  random_state: 42
+
+  # Training parameters
+  batch_size: 32
+  num_epochs: 100
+  early_stopping_patience: 20
+
+  # Optimizer
+  optimizer: "Adam"
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+
+  # Scheduler
+  use_scheduler: true
+  scheduler: "ReduceLROnPlateau"
+  scheduler_factor: 0.5
+  scheduler_patience: 10
+
+  # Loss Function
+  loss:
+    type: "hybrid"
+    lambda_center: 0.01
+    lambda_triplet: 0.001
+    triplet_margin: 0.2
+
+  # Regularization
+  dropout_rate: 0.3
+  label_smoothing: 0.1
+
+# Evaluation Configuration
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1_score"
+    - "specificity"
+    - "sensitivity"
+    - "auc"
+    - "confusion_matrix"
+
+  # Visualization
+  save_plots: true
+  plot_formats: ["png", "pdf"]
+
+  # Explainability
+  compute_gradcam: true
+  compute_attention_rollout: true
+
+# Hyperparameter Tuning (Optuna)
+hyperparameter_tuning:
+  use_optuna: true
+  n_trials: 100
+  timeout: 3600  # seconds
+
+  search_space:
+    learning_rate: [1e-5, 1e-3]
+    batch_size: [16, 32, 64]
+    gcn_hidden_dim: [32, 64, 128, 256]
+    vit_num_heads: [4, 8, 16]
+    vit_num_layers: [2, 4, 6]
+    dropout: [0.1, 0.5]
+    lambda_center: [0.001, 0.1]
+    lambda_triplet: [0.0001, 0.01]
+
+# Logging
+logging:
+  log_dir: "./logs"
+  log_level: "INFO"
+  save_checkpoints: true
+  checkpoint_frequency: 10  # epochs
+  tensorboard: true
+
+# Reproducibility
+reproducibility:
+  seed: 42
+  deterministic: true
+  benchmark: false
+
+# Hardware
+hardware:
+  device: "cuda"  # cuda or cpu
+  num_workers: 4
+  pin_memory: true
+
+# Output Paths
+output:
+  model_dir: "./checkpoints"
+  results_dir: "./results"
+  figures_dir: "./figures"
+  pretrained_path: "./pretrained"
