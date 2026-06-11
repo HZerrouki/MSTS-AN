@@ -2,10 +2,9 @@
 
 ## Overview
 
-This document provides detailed documentation of the MSTS-AN source code repository to accompany the paper *"MSTS-AN: A Hybrid GCN-Transformer Approach for Early Alzheimer's Detection from EEG Signals"* submitted to AECE Journal.
+This document provides detailed documentation of the MSTS-AN source code repository to accompany the paper *"MSTS-AN: A Hybrid GCN-Transformer Approach for Early Alzheimer's Detection from EEG Signals"*.
 
 **Repository URL**: https://github.com/HZerrouki/MSTS-AN
-**Paper ID**: 2752
 
 ---
 
@@ -459,8 +458,6 @@ Djillali Liabes University of Sidi Bel Abbes, Algeria
 [3] PyTorch Geometric: https://pytorch-geometric.readthedocs.io/
 
 [4] MNE-Python: https://mne.tools/
-
-[5] Original Paper: MSTS-AN (AECE, 2026)
 
 ---
 
