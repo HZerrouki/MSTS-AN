@@ -4,8 +4,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.12+-ee4c2c.svg)](https://pytorch.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-Official implementation of **"MSTS-AN: A Hybrid GCN-Transformer Approach for Early Alzheimer's Detection from EEG Signals"** submitted to *Advances in Electrical and Computer Engineering (AECE)*.
-
+Official implementation of **"MSTS-AN: A Hybrid GCN-Transformer Approach for Early Alzheimer's Detection from EEG Signals"** 
 ## Overview
 
 MSTS-AN is a novel deep learning architecture that combines **Graph Convolutional Networks (GCN)** for spatial feature extraction and **Vision Transformers (ViT)** for temporal dependency modeling to detect early-stage Alzheimer's Disease (AD) and Mild Cognitive Impairment (MCI) from EEG signals.
@@ -320,9 +319,6 @@ If you use this code or find our work helpful, please cite:
 @article{zerrouki2026mstsan,
   title={MSTS-AN: A Hybrid GCN-Transformer Approach for Early Alzheimer's Detection from EEG Signals},
   author={Zerrouki, Hadj and Azzaz-Rahmani, Salima},
-  journal={Advances in Electrical and Computer Engineering},
-  year={2026},
-  publisher={AECE}
 }
 ```
 
