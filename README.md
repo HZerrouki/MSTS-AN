@@ -1,4 +1,4 @@
-# MSTS-AN: Multi-Scale Temporal-Spatial Attention Network
+# MSTS-AN: A Hybrid GCN-Transformer Network for Early Alzheimer’s Detection from EEG Signals
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.12+-ee4c2c.svg)](https://pytorch.org/)
